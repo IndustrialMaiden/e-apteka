@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SourceSyncRemoteConfigurationsService"><![CDATA[{
+  "connections": [
+    {
+      "type": "ssh_configuration",
+      "name": "E-APTEKA",
+      "hostname": "89.110.113.240",
+      "username": "root",
+      "remote_workspace_path": "D:\\OSPanel\\domains\\e-apteka.loc"
+    }
+  ],
+  "mainConnection": "E-APTEKA"
+}]]></component>
+</project>
