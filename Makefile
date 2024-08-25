@@ -26,7 +26,7 @@ dc_down:
 
 ##################
 # App
-##################
+##################mak
 
 app_bash:
 	docker-compose -f ./docker/docker-compose.yml exec -u www-data php-fpm bash
