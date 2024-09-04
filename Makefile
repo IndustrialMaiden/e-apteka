@@ -23,7 +23,8 @@ dc_logs:
 dc_down:
 	docker-compose -f ./docker/docker-compose.yml down -v --rmi=all --remove-orphans
 
-
+root_dir:
+	cd e-apteka/docker-symfony
 ##################
 # App
 ##################mak
