@@ -3,18 +3,27 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <div class="container security-form">
 
-    {{ form_errors(registrationForm) }}
+        <div class="login-form">
+            <h1>Регистрация</h1>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+            {{ form_errors(registrationForm) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+            {{ form_start(registrationForm) }}
+            <br>
+            {{ form_widget(registrationForm.email,{'attr':{'class':'form form-control','placeholder':"Электронная почта"}}) }}
+            <br>
+            {{ form_widget(registrationForm.username,{'attr':{'class':'form form-control','placeholder':"Имя пользователя"}}) }}
+            <br>
+            {{ form_widget(registrationForm.plainPassword,{'attr':{'class':'form form-control','placeholder':"Пароль"}}) }}
+            <br>
+            <label for="">Согласен с правилами сайта </label>
+            {{ form_widget(registrationForm.agreeTerms) }}
+            <br>
+            <br>
+            <button type="submit" class="btn btn-block btn-primary">Зарегистрироваться</button>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
 {% endblock %}

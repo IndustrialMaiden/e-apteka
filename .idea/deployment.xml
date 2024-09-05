@@ -10,6 +10,8 @@
           <excludedPaths>
             <excludedPath local="true" path="$PROJECT_DIR$/node_modules" />
             <excludedPath path="/e-apteka/docker-symfony/node_modules" />
+            <excludedPath local="true" path="$PROJECT_DIR$/var" />
+            <excludedPath path="/e-apteka/docker-symfony/var" />
           </excludedPaths>
         </serverdata>
       </paths>
