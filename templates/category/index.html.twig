@@ -7,6 +7,9 @@
         <br>
         <h2>Категории</h2>
         <br>
+
+        {% include 'layouts/flash_message.html.twig' %}
+
         <table class="table">
             {% if categories %}
             <tr>
@@ -19,8 +22,8 @@
                     <td>{{ category.id }}</td>
                     <td><a href="{{ path('app_category_show', { id: category.id }) }}">{{ category.name }}</a></td>
                     <td>
-                        <a href="{{ path('app_category_update', { id: category.id}) }}">Изменить</a> |
-                        <a href="{{ path('app_category_delete', { id: category.id}) }}" class="text-danger">Удалить</a>
+                        <a class="btn btn-outline-primary" href="{{ path('app_category_update', { id: category.id}) }}">Изменить</a>
+                        <a onclick="return confirm('Вы уверены что хотите удалить категорию?')" class="btn btn-danger" href="{{ path('app_category_delete', { id: category.id}) }}">Удалить</a>
                     </td>
                 </tr>
             {% endfor %}

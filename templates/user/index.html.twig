@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Пользователи{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <br>
+        <h2>Пользователи</h2>
+        <br>
+
+        {% include 'layouts/flash_message.html.twig' %}
+
+        <table class="table">
+            <tr>
+                <th>ID</th>
+                <th>Имя пользователя</th>
+                <th>E-mail</th>
+                <th>Роль</th>
+                <th>Действие</th>
+                <th></th>
+            </tr>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{% if ("ROLE_ADMIN" in user.roles) %}
+                            <span class="text-primary">Администратор</span>
+                        {% elseif ("ROLE_USER" in user.roles) %}
+                            <span class="text-secondary">Пользователь</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-primary"
+                           href="{{ path('app_user_to-user', { id: user.id}) }}">User</a>
+                        {% if ('ROLE_ADMIN' in user.roles) == false %}
+                            <a onclick="return confirm('Вы уверены что хотите сделать этого пользователя администратором?')"
+                               class="btn btn-primary" href="{{ path('app_user_to-admin', { id: user.id}) }}">Admin</a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a onclick="return confirm('Вы уверены что хотите удалить этого пользователя?')"
+                           class="btn btn-danger" href="{{ path('app_user_delete', { id: user.id}) }}">Удалить</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

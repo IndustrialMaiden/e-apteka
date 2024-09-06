@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class CategoryController extends AbstractController
 {
-    #[Route('/category', name: 'app_category')]
+    #[Route('/admin/category', name: 'app_category')]
     public function index(CategoryRepository $categoryRepository): Response
     {
         $categories = $categoryRepository->findBy([], ['id' => 'ASC']);
@@ -21,7 +21,7 @@ class CategoryController extends AbstractController
         return $this->render('category/index.html.twig', ['categories' => $categories]);
     }
 
-    #[Route('/category/{id}/show', name: 'app_category_show')]
+    #[Route('/admin/category/{id}/show', name: 'app_category_show')]
     public function show(Category $category): Response
     {
         return $this->render('category/show.html.twig', [
@@ -29,7 +29,7 @@ class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/category/new', name: 'app_category_new')]
+    #[Route('/admin/category/new', name: 'app_category_new')]
     public function addCategory(EntityManagerInterface $entityManager, Request $request): Response
     {
         $category = new Category();
@@ -42,13 +42,15 @@ class CategoryController extends AbstractController
             $entityManager->persist($category);
             $entityManager->flush();
 
+            $this->addFlash('success', "Категория \"{$category->getName()}\" была создана");
+
             return $this->redirectToRoute('app_category');
         }
 
         return $this->render('category/new.html.twig', ['form' => $form->createView()]);
     }
 
-    #[Route('/category/{id}/update', name: 'app_category_update')]
+    #[Route('/admin/category/{id}/update', name: 'app_category_update')]
     public function update(Category $category, EntityManagerInterface $entityManager, Request $request): Response
     {
         $form = $this->createForm(CategoryFormType::class, $category);
@@ -57,17 +59,21 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
             $entityManager->flush();
 
+            $this->addFlash('success', "Категория \"{$category->getName()}\" была изменена ");
+
             return $this->redirectToRoute('app_category');
         }
 
         return $this->render('category/update.html.twig', ['form' => $form->createView(), 'categoryName' => $category->getName()]);
     }
 
-    #[Route('/category/{id}/delete', name: 'app_category_delete')]
+    #[Route('/admin/category/{id}/delete', name: 'app_category_delete')]
     public function delete(Category $category, EntityManagerInterface $entityManager): Response
     {
         $entityManager->remove($category);
         $entityManager->flush();
+
+        $this->addFlash('danger', "Категория \"{$category->getName()}\" была удалена");
 
         return $this->redirectToRoute('app_category');
     }
