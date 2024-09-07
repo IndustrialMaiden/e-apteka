@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Новая категория{% endblock %}
+{% block title %}Изменение категории{% endblock %}
 
 {% block body %}
     <div class="container">
         <br>
-        <h2>Новая категория</h2>
+        <h2>Изменение категории</h2>
         <br>
         {{ form_start(form) }}
-        <label for="">Название категории</label>
+        <label for="">Новое название категории</label>
         <br>
         {{ form_widget(form.name,{'attr':{'class': 'form form-control'}}) }}
         <br>
-        <input type="submit" value="Создать" class="btn btn-primary">
+        <input type="submit" value="Сохранить" class="btn btn-primary btn-block">
         {{ form_end(form) }}
     </div>
 {% endblock %}

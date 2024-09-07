@@ -7,30 +7,32 @@
         <br>
         <h2>Категории</h2>
         <br>
-
-        {% include 'layouts/flash_message.html.twig' %}
+        <a class="btn btn-outline-primary" href="{{ path('app_category_new') }}">Добавить новую категорию</a>
+        <br><br>
+        {% include 'layouts/_flash_message.html.twig' %}
 
         <table class="table">
             {% if categories %}
-            <tr>
-                <th>ID</th>
-                <th>Название</th>
-                <th>Действия</th>
-            </tr>
-            {% for category in categories %}
                 <tr>
-                    <td>{{ category.id }}</td>
-                    <td><a href="{{ path('app_category_show', { id: category.id }) }}">{{ category.name }}</a></td>
-                    <td>
-                        <a class="btn btn-outline-primary" href="{{ path('app_category_update', { id: category.id}) }}">Изменить</a>
-                        <a onclick="return confirm('Вы уверены что хотите удалить категорию?')" class="btn btn-danger" href="{{ path('app_category_delete', { id: category.id}) }}">Удалить</a>
-                    </td>
+                    <th>ID</th>
+                    <th>Название</th>
+                    <th>Действия</th>
                 </tr>
-            {% endfor %}
+                {% for category in categories %}
+                    <tr>
+                        <td>{{ category.id }}</td>
+                        <td><a href="{{ path('app_category_show', { id: category.id }) }}">{{ category.name }}</a></td>
+                        <td>
+                            <a class="btn btn-outline-primary"
+                               href="{{ path('app_category_update', { id: category.id}) }}">Изменить</a>
+                            <a onclick="return confirm('Вы уверены что хотите удалить категорию?')"
+                               class="btn btn-danger" href="{{ path('app_category_delete', { id: category.id}) }}">Удалить</a>
+                        </td>
+                    </tr>
+                {% endfor %}
             {% else %}
                 <p>Категории не были добавлены</p>
             {% endif %}
         </table>
-        <a class="btn btn-outline-primary" href="{{ path('app_category_new') }}">Добавить новую категорию</a>
     </div>
 {% endblock %}

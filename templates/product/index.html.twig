@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Товары{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <br>
+        <h1>Товары</h1>
+        <br>
+        <a class="btn btn-outline-primary" href="{{ path('app_product_new') }}">Добавить товар</a>
+        <br><br>
+        {% include "layouts/_flash_message.html.twig" %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Название</th>
+                <th>Подкатегории</th>
+                <th>Описание</th>
+                <th>Цена</th>
+                <th>Действия</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{% for subCategory in product.subCategories %}
+                            {{ subCategory.name }}
+                        {% endfor %}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>
+                        <a class="btn btn-outline-primary" href="{{ path('app_product_show', {'id': product.id}) }}">Показать</a>
+                        <a class="btn btn-primary"
+                           href="{{ path('app_product_edit', {'id': product.id}) }}">Изменить</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Товары не были добавлены</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

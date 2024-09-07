@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <br>
+        <h1>{{ product.name }}</h1>
+        <br>
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ product.id }}</td>
+            </tr>
+            <tr>
+                <th>Подкатегории</th>
+                <td>{% for subCategory in product.subCategories %}
+                        {{ subCategory.name }}
+                    {% endfor %}</td>
+            </tr>
+            <tr>
+                <th>Описание</th>
+                <td>{{ product.description }}</td>
+            </tr>
+            <tr>
+                <th>Цена</th>
+                <td>{{ product.price }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <a class="btn btn-outline-primary" href="{{ path('app_product') }}">Вернуться к списку</a>
+
+        <a class="btn btn-primary" href="{{ path('app_product_edit', {'id': product.id}) }}">Изменить</a>
+
+        {{ include('product/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

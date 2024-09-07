@@ -1,0 +1,19 @@
+{{ form_start(form) }}
+<label for="">Название товара</label>
+<br>
+{{ form_widget(form.name,{'attr':{'class': 'form form-control'}}) }}
+<br>
+<label for="">Описание</label>
+<br>
+{{ form_widget(form.description,{'attr':{'class': 'form form-control'}}) }}
+<br>
+<label for="">Цена</label>
+<br>
+{{ form_widget(form.price,{'attr':{'class': 'form form-control'}}) }}
+<br>
+<label for="">Подкатегории (можно несколько)</label>
+<br>
+{{ form_widget(form.subCategories,{'attr':{'class': 'form form-control'}}) }}
+<br>
+<button class="btn btn-primary">{{ button_label|default('Создать') }}</button>
+{{ form_end(form) }}

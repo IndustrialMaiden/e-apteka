@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Подкатегория {{ sub_category.name }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <br>
+        <h2>Подкатегория</h2>
+        <br>
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ sub_category.id }}</td>
+            </tr>
+            <tr>
+                <th>Название</th>
+                <td>{{ sub_category.name }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <a class="btn btn-outline-primary" href="{{ path('app_sub_category_index') }}">Вернуться к списку</a>
+
+        <a class="btn btn-primary" href="{{ path('app_sub_category_edit', {'id': sub_category.id}) }}">Изменить</a>
+
+        {{ include('sub_category/_delete_form.html.twig') }}
+    </div>
+{% endblock %}
