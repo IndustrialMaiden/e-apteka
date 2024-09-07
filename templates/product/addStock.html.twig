@@ -1,0 +1,23 @@
+{% include 'base.html.twig' %}
+
+{% block title %}Добавить на склад {{ product.name }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <br>
+        <h2>Добавить на склад: {{ product.name }}</h2>
+        <br>
+        {% include 'layouts/_flash_message.html.twig' %}
+
+        {{ form_start(form) }}
+
+        <label for="">Количество</label>
+        {{ form_widget(form.quantity,{'attr':{'class': 'form form-control'}}) }}
+
+        <br>
+
+        <button class="btn btn-primary">{{ button_label|default('Добавить') }}</button>
+        <a class="btn btn-outline-primary" href="{{ path('app_product') }}">Вернуться к списку</a>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

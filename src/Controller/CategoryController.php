@@ -50,7 +50,7 @@ class CategoryController extends AbstractController
         return $this->render('category/new.html.twig', ['form' => $form->createView()]);
     }
 
-    #[Route('/admin/category/{id}/update', name: 'app_category_update')]
+    #[Route('/admin/category/{id}/edit', name: 'app_category_edit')]
     public function update(Category $category, EntityManagerInterface $entityManager, Request $request): Response
     {
         $form = $this->createForm(CategoryFormType::class, $category);
@@ -64,7 +64,7 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('app_category');
         }
 
-        return $this->render('category/update.html.twig', ['form' => $form->createView(), 'categoryName' => $category->getName()]);
+        return $this->render('category/edit.html.twig', ['form' => $form->createView(), 'categoryName' => $category->getName()]);
     }
 
     #[Route('/admin/category/{id}/delete', name: 'app_category_delete')]

@@ -7,7 +7,7 @@
         <br>
         <h2>Категории</h2>
         <br>
-        <a class="btn btn-outline-primary" href="{{ path('app_category_new') }}">Добавить новую категорию</a>
+        <a class="btn btn-success" href="{{ path('app_category_new') }}">Добавить новую категорию</a>
         <br><br>
         {% include 'layouts/_flash_message.html.twig' %}
 
@@ -24,7 +24,7 @@
                         <td><a href="{{ path('app_category_show', { id: category.id }) }}">{{ category.name }}</a></td>
                         <td>
                             <a class="btn btn-outline-primary"
-                               href="{{ path('app_category_update', { id: category.id}) }}">Изменить</a>
+                               href="{{ path('app_category_edit', { id: category.id}) }}">Изменить</a>
                             <a onclick="return confirm('Вы уверены что хотите удалить категорию?')"
                                class="btn btn-danger" href="{{ path('app_category_delete', { id: category.id}) }}">Удалить</a>
                         </td>

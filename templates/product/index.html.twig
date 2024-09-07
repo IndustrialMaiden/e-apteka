@@ -7,7 +7,7 @@
         <br>
         <h1>Товары</h1>
         <br>
-        <a class="btn btn-outline-primary" href="{{ path('app_product_new') }}">Добавить товар</a>
+        <a class="btn btn-success" href="{{ path('app_product_new') }}">Добавить товар</a>
         <br><br>
         {% include "layouts/_flash_message.html.twig" %}
         <table class="table">
@@ -18,6 +18,7 @@
                 <th>Подкатегории</th>
                 <th>Описание</th>
                 <th>Цена</th>
+                <th>Количество</th>
                 <th>Действия</th>
             </tr>
             </thead>
@@ -29,12 +30,18 @@
                     <td>{% for subCategory in product.subCategories %}
                             {{ subCategory.name }}
                         {% endfor %}</td>
-                    <td>{{ product.description }}</td>
+                    <td>{{ product.description|slice(0, 50) }} ...</td>
                     <td>{{ product.price }}</td>
+                    <td>{% if product.stock > 0 %}
+                            {{ product.stock }}
+                        {% else %}
+                            <span class="text-bg-danger">Нет на складе</span>
+                        {% endif %}
+                    </td>
                     <td>
                         <a class="btn btn-outline-primary" href="{{ path('app_product_show', {'id': product.id}) }}">Показать</a>
-                        <a class="btn btn-primary"
-                           href="{{ path('app_product_edit', {'id': product.id}) }}">Изменить</a>
+                        <a class="btn btn-primary" href="{{ path('app_product_edit', {'id': product.id}) }}">Изменить</a>
+                        <a class="btn btn-warning" href="{{ path('app_product_stock_add', {'id': product.id}) }}">Добавить</a>
                     </td>
                 </tr>
             {% else %}

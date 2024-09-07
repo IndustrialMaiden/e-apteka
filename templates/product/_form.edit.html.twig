@@ -1,4 +1,7 @@
 {{ form_start(form) }}
+
+<h4 class="text-danger">{{ form_errors(form.image) }}</h4>
+
 <label for="">Название товара</label>
 <br>
 {{ form_widget(form.name,{'attr':{'class': 'form form-control'}}) }}
@@ -10,6 +13,14 @@
 <label for="">Цена</label>
 <br>
 {{ form_widget(form.price,{'attr':{'class': 'form form-control'}}) }}
+<br>
+<label for="">Изображение</label>
+<br>
+{% if product.image %}
+    <img src="{{ product.image }}" class="img-fluid img-thumbnail" alt="Product image">
+{% endif %}
+{{ form_widget(form.image,{'attr':{'class': 'form'}}) }}
+<br>
 <br>
 <label for="">Подкатегории (можно несколько)</label>
 <br>

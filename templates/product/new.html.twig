@@ -4,10 +4,11 @@
 
 {% block body %}
     <div class="container">
+        <br>
         <h1>Новый товар</h1>
         <br>
 
-        {{ include('product/_form.html.twig') }}
+        {{ include('product/_form.new.html.twig', {'button_label': 'Создать'}) }}
 
         <br>
         <a class="btn btn-outline-primary" href="{{ path('app_product') }}">Вернуться к списку</a>
