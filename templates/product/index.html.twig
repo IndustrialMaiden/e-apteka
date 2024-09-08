@@ -7,13 +7,14 @@
         <br>
         <h1>Товары</h1>
         <br>
-        <a class="btn btn-success" href="{{ path('app_product_new') }}">Добавить товар</a>
+        <a class="btn btn-success" href="{{ path('app_admin_product_new') }}">Добавить товар</a>
         <br><br>
         {% include "layouts/_flash_message.html.twig" %}
         <table class="table">
             <thead>
             <tr>
                 <th>ID</th>
+                <th>Изображение</th>
                 <th>Название</th>
                 <th>Подкатегории</th>
                 <th>Описание</th>
@@ -26,6 +27,7 @@
             {% for product in products %}
                 <tr>
                     <td>{{ product.id }}</td>
+                    <td><img src="{{ product.image }}" class="img-fluid img-thumbnail img-small" alt="Product image"></td>
                     <td>{{ product.name }}</td>
                     <td>{% for subCategory in product.subCategories %}
                             {{ subCategory.name }}
@@ -39,9 +41,9 @@
                         {% endif %}
                     </td>
                     <td>
-                        <a class="btn btn-outline-primary" href="{{ path('app_product_show', {'id': product.id}) }}">Показать</a>
-                        <a class="btn btn-primary" href="{{ path('app_product_edit', {'id': product.id}) }}">Изменить</a>
-                        <a class="btn btn-warning" href="{{ path('app_product_stock_add', {'id': product.id}) }}">Добавить</a>
+                        <a class="btn btn-outline-primary" href="{{ path('app_admin_product_show', {'id': product.id}) }}">Показать</a>
+                        <a class="btn btn-primary" href="{{ path('app_admin_product_edit', {'id': product.id}) }}">Изменить</a>
+                        <a class="btn btn-warning" href="{{ path('app_admin_product_stock_add', {'id': product.id}) }}">Добавить</a>
                     </td>
                 </tr>
             {% else %}

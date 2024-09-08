@@ -19,7 +19,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 #[Route('/admin/product')]
 final class ProductController extends AbstractController
 {
-    #[Route(name: 'app_product', methods: ['GET'])]
+    #[Route(name: 'app_admin_product', methods: ['GET'])]
     public function index(ProductRepository $productRepository): Response
     {
         return $this->render('product/index.html.twig', [
@@ -27,7 +27,7 @@ final class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_product_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_admin_product_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $product = new Product();
@@ -39,7 +39,7 @@ final class ProductController extends AbstractController
             $imageErrors = $form->get('image')->getErrors();
             if ($imageErrors->count() > 0)
             {
-                return $this->redirectToRoute('app_product_new');
+                return $this->redirectToRoute('app_admin_product_new');
             }
 
             $image = $form->get('image')->getData();
@@ -80,7 +80,7 @@ final class ProductController extends AbstractController
 
             $this->addFlash('success', "Товар {$product->getName()} успешно добавлен");
 
-            return $this->redirectToRoute('app_product', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_admin_product', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('product/new.html.twig', [
@@ -89,7 +89,7 @@ final class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_product_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_admin_product_show', methods: ['GET'])]
     public function show(Product $product): Response
     {
         return $this->render('product/show.html.twig', [
@@ -97,7 +97,7 @@ final class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_product_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_admin_product_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ProductTypeEditForm::class, $product);
@@ -109,7 +109,7 @@ final class ProductController extends AbstractController
 
             $this->addFlash('success', "Товар {$product->getName()} успешно изменен");
 
-            return $this->redirectToRoute('app_product', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_admin_product', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('product/edit.html.twig', [
@@ -118,7 +118,7 @@ final class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_product_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_admin_product_delete', methods: ['POST'])]
     public function delete(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $product->getId(), $request->getPayload()->getString('_token')))
@@ -129,10 +129,10 @@ final class ProductController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_product', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_admin_product', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/add/stock', name: 'app_product_stock_add', methods: ['POST', 'GET'])]
+    #[Route('/{id}/add/stock', name: 'app_admin_product_stock_add', methods: ['POST', 'GET'])]
     public function addStock(Product $product, EntityManagerInterface $entityManager, Request $request): Response
     {
         $addStock = new AddProductHistory();
@@ -144,7 +144,7 @@ final class ProductController extends AbstractController
             if ($addStock->getQuantity() <= 0)
             {
                 $this->addFlash('danger', "Количество должно быть больше 0");
-                return $this->redirectToRoute('app_product_stock_add', ['id' => $product->getId()]);
+                return $this->redirectToRoute('app_admin_product_stock_add', ['id' => $product->getId()]);
             }
 
             $addStock->setProduct($product)->setCreatedAt(new \DateTimeImmutable());
@@ -154,7 +154,7 @@ final class ProductController extends AbstractController
 
             $this->addFlash('success', "На склад добавлено {$addStock->getQuantity()} {$product->getName()}");
 
-            return $this->redirectToRoute('app_product', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_admin_product', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('product/addStock.html.twig', [

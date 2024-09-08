@@ -17,7 +17,7 @@
 <label for="">Изображение</label>
 <br>
 {% if product.image %}
-    <img src="{{ product.image }}" class="img-fluid img-thumbnail" alt="Product image">
+    <img src="{{ product.image }}" class="img-fluid img-thumbnail img-medium" alt="Product image">
 {% endif %}
 {{ form_widget(form.image,{'attr':{'class': 'form'}}) }}
 <br>

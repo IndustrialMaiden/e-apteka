@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="card mb-12" style="width: 100%; margin-top: 60px">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ product.image }}" class="img-fluid rounded-start img-large" alt="{{ product.name }}">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title fs-3">{{ product.name }}</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item fs-4">{{ product.description }}</li>
+                            <li class="list-group-item fs-4"></li>
+                        </ul>
+                        <p class="card-text text-end fs-5">{{ product.price }} ₽</p>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{{ path('app_admin_product_show', {'id': product.id}) }}"
+                               class="btn btn-outline-success">В корзину</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2>Ваc может заинтересовать:</h2>
+
+        <div class="row">
+            {% for lastProduct in lastProducts %}
+                <div class="col-md-3 mt-4">
+                    <a href="{{ path('app_product_show', {'id': lastProduct.id}) }}"
+                       style="color: inherit; text-decoration: none;">
+                        <div class="card h-10" style="width: 14rem;">
+                            <img src="{{ lastProduct.image }}" class="card-img-top" alt="{{ lastProduct.name }}">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">{{ lastProduct.name }}</h5>
+                                <p class="card-text text-end">{{ product.price }} ₽</p>
+                                <a href="{{ path('app_admin_product_show', {'id': product.id}) }}"
+                                   class="btn btn-block btn-outline-success">В корзину</a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

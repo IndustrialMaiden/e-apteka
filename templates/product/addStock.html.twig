@@ -1,4 +1,4 @@
-{% include 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Добавить на склад {{ product.name }}{% endblock %}
 
@@ -17,7 +17,7 @@
         <br>
 
         <button class="btn btn-primary">{{ button_label|default('Добавить') }}</button>
-        <a class="btn btn-outline-primary" href="{{ path('app_product') }}">Вернуться к списку</a>
+        <a class="btn btn-outline-primary" href="{{ path('app_admin_product') }}">Вернуться к списку</a>
         {{ form_end(form) }}
     </div>
 {% endblock %}

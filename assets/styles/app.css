@@ -1,5 +1,5 @@
 body {
-    background-color: white;
+    background-color: #455a64;
 }
 
 .login-form{
@@ -17,3 +17,29 @@ body {
 .btn-block{
     width: 100%;
 }
+
+.h2{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.img-small{
+    width: 100px;
+}
+
+.img-medium{
+    width: 200px;
+}
+
+.img-large{
+    width: 400px;
+}
+
+.container{
+    background-color: white;
+}
+
+.nav-item{
+    color: white;
+}
+

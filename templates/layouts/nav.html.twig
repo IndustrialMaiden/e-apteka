@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg" style="background-color: #0daca5;">
     <div class="container">
-        <a class="navbar-brand" href="{{  path('app_default') }}">E-APTEKA</a>
+        <a class="navbar-brand" style="color: white" href="{{  path('app_home_index') }}">E-APTEKA</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -18,7 +18,7 @@
                         Админ
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{  path('app_product') }}">Товары</a></li>
+                        <li><a class="dropdown-item" href="{{  path('app_admin_product') }}">Товары</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{{  path('app_category') }}">Категории</a></li>
                         <li><a class="dropdown-item" href="{{  path('app_sub_category_index') }}">Подкатегории</a></li>
@@ -32,8 +32,8 @@
                 </li>
             </ul>
             <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search">
+                <button class="btn btn-outline-light" type="submit">Поиск</button>
             </form>
         </div>
     </div>
