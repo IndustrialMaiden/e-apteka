@@ -22,6 +22,10 @@
             {{ form_widget(registrationForm.agreeTerms) }}
             <br>
             <br>
+            <div class="mb-3">
+                Уже зарегистрированы? <a href="{{ path('app_login') }}">Войти</a>
+            </div>
+            <br>
             <button type="submit" class="btn btn-block btn-primary">Зарегистрироваться</button>
             {{ form_end(registrationForm) }}
         </div>

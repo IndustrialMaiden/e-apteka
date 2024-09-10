@@ -1,36 +1,78 @@
 <nav class="navbar navbar-expand-lg" style="background-color: #0daca5;">
     <div class="container">
-        <a class="navbar-brand" style="color: white" href="{{  path('app_home_index') }}">E-APTEKA</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" style="color: white" href="{{ path('app_home_index') }}">E-APTEKA</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+                aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
+                {% if categories is defined %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Каталог
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% for category in categories %}
+                                <li>
+                                    <a class="dropdown-item" style="color: #0daca5" style="font-weight: bold"
+                                       href="{{ path('app_product_filter', { 'type': 'category', 'id': category.id }) }}">
+                                        {{ category.name }}
+                                    </a>
+                                </li>
+                                {% for subCategory in category.subCategories %}
+                                    <li class="nav-item">
+                                        <a class="dropdown-item"
+                                           href="{{ path('app_product_filter', { 'type': 'subcategory', 'id': subCategory.id }) }}">
+                                            &emsp;&bull;&nbsp;{{ subCategory.name }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endif %}
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
                 </li>
                 {% if is_granted("ROLE_ADMIN") %}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Админ
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{  path('app_admin_product') }}">Товары</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="{{  path('app_category') }}">Категории</a></li>
-                        <li><a class="dropdown-item" href="{{  path('app_sub_category_index') }}">Подкатегории</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="{{  path('app_user') }}">Пользователи</a></li>
-                    </ul>
-                </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Админ
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ path('app_admin_product') }}">Товары</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="{{ path('app_category') }}">Категории</a></li>
+                            <li><a class="dropdown-item" href="{{ path('app_sub_category_index') }}">Подкатегории</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="{{ path('app_user') }}">Пользователи</a></li>
+                        </ul>
+                    </li>
                 {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Link</a>
-                </li>
             </ul>
+            {% if app.user == false %}
+            <div class="nav-item d-flex">
+                <a class="nav-link me-4 text-warning" style="font-weight: bold" href="{{ path('app_login') }}">Войти</a>
+            </div>
+                {% else %}
+                    <div class="nav-item d-flex">
+                        <a class="nav-link me-2 text-warning" style="font-weight: bold" href="{{ path('app_home_index') }}">{{ app.user.username }}</a>
+                    </div>
+                    <div class="nav-item d-flex">
+                        <a class="nav-link me-4" href="{{ path('app_logout') }}">Выйти</a>
+                    </div>
+            {% endif %}
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search">
                 <button class="btn btn-outline-light" type="submit">Поиск</button>

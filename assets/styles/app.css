@@ -1,5 +1,5 @@
 body {
-    background-color: #455a64;
+    background-color: #eff5f6;
 }
 
 .login-form{
@@ -18,7 +18,7 @@ body {
     width: 100%;
 }
 
-.h2{
+.page-title{
     margin-top: 30px;
     margin-bottom: 30px;
 }
@@ -36,10 +36,38 @@ body {
 }
 
 .container{
+}
+
+.container-body{
+    margin-top: 40px;
     background-color: white;
+    border-radius: 5px;
+    margin-bottom: 40px;
+    padding: 20px;
 }
 
 .nav-item{
     color: white;
+}
+
+.nav-bar{
+    color: white;
+}
+.nav-link{
+    color: white;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.card-body {
+    flex-grow: 1;
+}
+
+.card-footer {
+    margin-top: auto;
 }
 

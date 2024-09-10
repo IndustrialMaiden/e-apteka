@@ -1,0 +1,27 @@
+{% if pageCount > 1 %}
+    <nav aria-label="Page navigation">
+        <br><br>
+        <ul class="pagination justify-content-center">
+            {% if previous is defined %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ path(route, query|merge({(pageParameterName): previous})) }}">Назад</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">Назад</a>
+                </li>
+            {% endif %}
+            {% if previous is defined %}
+            {% endif %}
+            {% if next is defined %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ path(route, query|merge({(pageParameterName): next})) }}">Вперед</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">Вперед</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
