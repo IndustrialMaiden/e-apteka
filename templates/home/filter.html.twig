@@ -24,8 +24,8 @@
                                 </div>
                                 <div class="card-footer">
                                     <p class="list-group-item text-end fs-5">{{ product.price }} ₽</p>
-                                    <a href="{{ path('app_admin_product_show', {'id': product.id}) }}"
-                                       class="btn btn-block btn-outline-success">В корзину</a>
+                                    <a href="{{ path('app_cart_add', {'id': product.id}) }}"
+                                       class="btn btn-block btn-outline-primary">В корзину</a>
                                 </div>
                             </div>
                         </a>

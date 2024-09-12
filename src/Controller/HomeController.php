@@ -42,7 +42,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/{type}/{id}', name: 'app_product_filter', methods: ['GET'])]
+    #[Route('/{type}/{id}/show', name: 'app_product_filter', methods: ['GET'])]
     public function filter(string $type, int $id, ProductRepository $productRepository, CategoryRepository $categoryRepository, SubCategoryRepository $subCategoryRepository, Request $request, PaginatorInterface $paginator): Response
     {
         $trim = ltrim($request->getPathInfo(), '/');
@@ -69,7 +69,7 @@ class HomeController extends AbstractController
         $products = $paginator->paginate(
             $data,
             $request->query->getInt('page', 1),
-            1
+            4
         );
 
         return $this->render('home/filter.html.twig', [
