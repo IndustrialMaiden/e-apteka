@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Список заказов{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <br>
+        <h2>Выполненные заказы</h2>
+        <br>
+        <h4>Заказов выполнено на сумму: {{ totalAmount }} &#8381;</h4>
+        <br>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Пользователь</th>
+                <th>E-Mail</th>
+                <th>Товары</th>
+                <th>Общая цена</th>
+                <th>Дата</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td><a href="{{ path('app_profile', {userName: order.user.username}) }}">{{ order.user.username }}</a></td>
+                    <td>{{ order.user.email }}</td>
+                    <td>
+                        <ul>
+                            {% for item in order.orderItems %}
+                                <li>
+                                    <a href="{{ path('app_product_show', {id: item.product.id}) }}">{{ item.product.name }}
+                                        ({{ item.quantity }})</a></li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>{{ order.totalPrice }} &#8381;</td>
+                    <td>{{ order.date|date('d-m-Y H:i') }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Нет заказов</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

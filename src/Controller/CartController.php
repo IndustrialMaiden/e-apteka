@@ -10,8 +10,6 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class CartController extends AbstractController
 {
-
-
     public function __construct(private readonly ProductRepository $productRepository)
     {
     }
@@ -41,14 +39,20 @@ class CartController extends AbstractController
     }
 
     #[Route('/cart/add/{id}', name: 'app_cart_add', methods: ['GET'])]
-    public function add(int $id, SessionInterface $session): Response
+    public function add(int $id, SessionInterface $session, ProductRepository $productRepository): Response
     {
+        $product = $productRepository->find($id);
+        if ($product->getStock() <= 0){
+            return $this->redirectToRoute('app_home_index');
+        }
+
         $cart = $session->get('cart', []);
         if (!empty($cart[$id]))
         {
             $cart[$id]++;
         }
-        else{
+        else
+        {
             $cart[$id] = 1;
         }
         $session->set('cart', $cart);

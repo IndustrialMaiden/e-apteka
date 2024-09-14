@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Заказ оформлен{% endblock %}
+
+{% block body %}
+    <div class="container text-center">
+        <br>
+        <h2>Заказ успешно оформлен!</h2>
+        <h3>Номер заказа: <span class="text-primary" style="font-weight: bold">{{ order.id }}</span></h3>
+        <h3>Ожидайте SMS о готовности.</h3>
+        <a href="{{ path('app_home_index') }}" class="btn btn-primary mt-3">На главную страницу</a>
+    </div>
+{% endblock %}

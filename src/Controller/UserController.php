@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class UserController extends AbstractController
 {
-    #[Route('/admin/user', name: 'app_user')]
+    #[Route('/admin/users', name: 'app_user')]
     public function index(UserRepository $userRepository): Response
     {
         return $this->render('user/index.html.twig', [
@@ -19,7 +19,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/user/{id}/to-admin', name: 'app_user_to-admin')]
+    #[Route('/admin/users/{id}/to-admin', name: 'app_user_to-admin')]
     public function toAdmin(EntityManagerInterface $entityManager, User $user): Response
     {
         $user->setRoles(["ROLE_ADMIN","ROLE_USER"]);
@@ -28,7 +28,7 @@ class UserController extends AbstractController
         return $this->redirectToRoute('app_user');
     }
 
-    #[Route('/admin/user/{id}/to-user', name: 'app_user_to-user')]
+    #[Route('/admin/users/{id}/to-user', name: 'app_user_to-user')]
     public function toUser(EntityManagerInterface $entityManager, User $user): Response
     {
         $user->setRoles(["ROLE_USER"]);
@@ -37,7 +37,7 @@ class UserController extends AbstractController
         return $this->redirectToRoute('app_user');
     }
 
-    #[Route('/admin/user/{id}/delete', name: 'app_user_delete')]
+    #[Route('/admin/users/{id}/delete', name: 'app_user_delete')]
     public function delete(EntityManagerInterface $entityManager, User $user): Response
     {
         $entityManager->remove($user);

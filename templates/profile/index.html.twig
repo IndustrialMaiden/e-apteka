@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Профиль пользователя {{ user.username }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <br>
+        <h2>Профиль пользователя {{ user.username }}</h2>
+        <br>
+        <h3>Ваши заказы:</h3>
+        <br>
+        {% if orders is not empty %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Товары</th>
+                    <th>Общая цена</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td>{{ order.date|date('d-m-Y H:i') }}</td>
+                        <td>
+                            <ul>
+                                {% for item in order.orderItems %}
+                                    <li>
+                                        <a href="{{ path('app_product_show', {id: item.product.id}) }}">{{ item.product.name }}</a>
+                                        ({{ item.quantity }})
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>{{ order.totalPrice }} &#8381;</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Нет заказов.</p>
+        {% endif %}
+    </div>
+{% endblock %}

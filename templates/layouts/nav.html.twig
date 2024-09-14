@@ -7,35 +7,35 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                {% if categories is defined %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                            Каталог
-                        </a>
-                        <ul class="dropdown-menu">
-                            {% for category in categories %}
-                                <li>
-                                    <a class="dropdown-item" style="color: #0daca5" style="font-weight: bold"
-                                       href="{{ path('app_product_filter', { 'type': 'category', 'id': category.id }) }}">
-                                        {{ category.name }}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Каталог
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for category in categories %}
+                            <li>
+                                <a class="dropdown-item" style="color: #0daca5" style="font-weight: bold"
+                                   href="{{ path('app_product_filter', { 'type': 'category', 'id': category.id }) }}">
+                                    {{ category.name }}
+                                </a>
+                            </li>
+                            {% for subCategory in category.subCategories %}
+                                <li class="nav-item">
+                                    <a class="dropdown-item"
+                                       href="{{ path('app_product_filter', { 'type': 'subcategory', 'id': subCategory.id }) }}">
+                                        &emsp;&bull;&nbsp;{{ subCategory.name }}
                                     </a>
                                 </li>
-                                {% for subCategory in category.subCategories %}
-                                    <li class="nav-item">
-                                        <a class="dropdown-item"
-                                           href="{{ path('app_product_filter', { 'type': 'subcategory', 'id': subCategory.id }) }}">
-                                            &emsp;&bull;&nbsp;{{ subCategory.name }}
-                                        </a>
-                                    </li>
-                                {% endfor %}
+                            {% endfor %}
+                            {% if not loop.last %}
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                            {% endfor %}
-                        </ul>
-                    </li>
-                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
                 </li>
@@ -46,6 +46,12 @@
                             Админ
                         </a>
                         <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ path('app_admin_orders') }}">Заказы активные</a></li>
+                            <li><a class="dropdown-item" href="{{ path('app_admin_orders_completed') }}">Заказы
+                                    выполненные</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item" href="{{ path('app_admin_product') }}">Товары</a></li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -62,16 +68,27 @@
                 {% endif %}
             </ul>
             {% if app.user == false %}
-            <div class="nav-item d-flex">
-                <a class="nav-link me-4 text-warning" style="font-weight: bold" href="{{ path('app_login') }}">Войти</a>
-            </div>
-                {% else %}
-                    <div class="nav-item d-flex">
-                        <a class="nav-link me-2 text-warning" style="font-weight: bold" href="{{ path('app_home_index') }}">{{ app.user.username }}</a>
-                    </div>
-                    <div class="nav-item d-flex">
-                        <a class="nav-link me-4" href="{{ path('app_logout') }}">Выйти</a>
-                    </div>
+                <div class="nav-item d-flex">
+                    <a class="nav-link me-4 text-warning" style="font-weight: bold"
+                       href="{{ path('app_login') }}">Войти</a>
+                </div>
+            {% else %}
+                <div class="nav-item d-flex">
+                    <a class="nav-link me-2 text-warning" style="font-weight: bold"
+                       href="{{ path('app_profile', {'userName': app.user.username}) }}">{{ app.user.username }}</a>
+                </div>
+                <div class="nav-item d-flex me-2">
+                    |
+                </div>
+                <div class="nav-item d-flex">
+                    <a class="nav-link me-2" href="{{ path('app_cart') }}">Корзина</a>
+                </div>
+                <div class="nav-item d-flex me-2">
+                    |
+                </div>
+                <div class="nav-item d-flex">
+                    <a class="nav-link me-4" href="{{ path('app_logout') }}">Выйти</a>
+                </div>
             {% endif %}
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search">
