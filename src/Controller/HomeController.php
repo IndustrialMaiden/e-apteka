@@ -18,6 +18,9 @@ class HomeController extends AbstractController
     public function index(ProductRepository $productRepository, Request $request, PaginatorInterface $paginator): Response
     {
         $data = $productRepository->findBy([],['id' => "DESC"]);
+
+        shuffle($data);
+
         $products = $paginator->paginate(
             $data,
             $request->query->getInt('page', 1),
@@ -32,7 +35,11 @@ class HomeController extends AbstractController
     #[Route('/product/{id}/show', name: 'app_product_show', methods: ['GET'])]
     public function show(Product $product, ProductRepository $productRepository): Response
     {
-        $lastProducts = $productRepository->findBy([], ['id' => "DESC"], 6);
+        $lastProducts = $productRepository->findBy([], ['id' => "DESC"]);
+
+        shuffle($lastProducts);
+
+        $lastProducts = array_slice($lastProducts, 0, 6);
 
         return $this->render('home/show.html.twig', [
             'product' => $product,

@@ -13,10 +13,9 @@
                     <div class="card-body">
                         <h5 class="card-title fs-3">{{ product.name }}</h5>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item fs-4">{{ product.description }}</li>
-                            <li class="list-group-item fs-4"></li>
+                            <li class="list-group-item fs-6">{{ product.description }}</li>
                         </ul>
-                        <p class="card-text text-end fs-5">{{ product.price }} ₽</p>
+                        <p class="card-text text-end fs-4">{{ product.price }} ₽</p>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             {% if product.stock > 0 %}
                                 <a href="{{ path('app_cart_add', {'id': product.id}) }}"
@@ -44,10 +43,10 @@
                                      alt="{{ lastProduct.name }}" style="height: 100px; width: auto;">
                             </div>
                             <div class="card-body flex-grow-1" style="padding: 10px;">
-                                <h6 class="card-title" style="font-size: 1.2rem;">{{ lastProduct.name }}</h6>
+                                <h6 class="card-title" style="font-size: 1.1rem;">{{ lastProduct.name }}</h6>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item" style="font-size: 1rem; padding: 5px;">
-                                        {{ lastProduct.description|slice(0, 30) }} ...
+                                    <li class="list-group-item" style="font-size: 0.8rem; padding: 5px;">
+                                        {{ lastProduct.description|slice(0, 50) }} ...
                                     </li>
                                 </ul>
                             </div>
