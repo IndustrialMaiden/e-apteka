@@ -60,7 +60,9 @@ final class ProductController extends AbstractController
                 }
                 catch (FileException $exception)
                 {
-                };
+                    $this->addFlash('danger', 'Ошибка загрузки файла: ' . $exception->getMessage());
+                    return $this->redirectToRoute('app_admin_product');
+                }
 
                 $product->setImage('/uploads/images/products' . '/' . $newFileName);
             }
@@ -118,11 +120,16 @@ final class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_admin_product_delete', methods: ['POST'])]
-    public function delete(Request $request, Product $product, EntityManagerInterface $entityManager): Response
+    #[Route('/remove/{id}', name: 'app_admin_product_delete', methods: ['POST'])]
+    public function remove(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $product->getId(), $request->getPayload()->getString('_token')))
         {
+            foreach ( $product->getAddProductHistories() as $item)
+            {
+                $entityManager->remove($item);
+            }
+
             $this->addFlash('danger', "Товар {$product->getName()} успешно удален");
 
             $entityManager->remove($product);

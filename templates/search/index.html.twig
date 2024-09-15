@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ title }}{% endblock %}
+{% block title %}Поиск: {{ query }}{% endblock %}
 
 {% block body %}
     <div class="container">
-        <h2 class="page-title">{{ title }}</h2>
+        <h2 class="page-title">Поиск: {{ query }}</h2>
         {% if products is not empty %}
             <div class="row container-body">
                 {% for product in products %}
@@ -19,15 +19,15 @@
                                 <div class="card-body flex-grow-1" style="padding: 10px;">
                                     <h6 class="card-title" style="font-size: 1.2rem;">{{ product.name }}</h6>
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item"
-                                            style="font-size: 1rem; padding: 5px;">{{ product.description|slice(0, 30) }}
-                                            ...
+                                        <li class="list-group-item" style="font-size: 1rem; padding: 5px;">
+                                            {{ product.description|slice(0, 30) }}...
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="card-footer" style="padding: 5px;">
-                                    <p class="list-group-item text-end" style="font-size: 1.2rem;">{{ product.price }}
-                                        ₽</p>
+                                    <p class="list-group-item text-end" style="font-size: 1.2rem;">
+                                        {{ product.price }} ₽
+                                    </p>
                                     {% if product.stock > 0 %}
                                         <a href="{{ path('app_cart_add', {'id': product.id}) }}"
                                            class="btn btn-block btn-outline-primary btn-sm">В корзину</a>
@@ -43,7 +43,7 @@
             </div>
             {{ knp_pagination_render(products,'layouts/pagination.html.twig') }}
         {% else %}
-            <h3>Не найдено товаров данной категории</h3>
+            <h3>Ничего не найдено</h3>
         {% endif %}
     </div>
 {% endblock %}
